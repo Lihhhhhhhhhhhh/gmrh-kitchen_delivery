@@ -1,22 +1,24 @@
+import Link from "next/link";
+
 export function MenuPreview() {
   const menus = [
     {
       id: 1,
       name: "Nasi Goreng",
       description: "Nasi goreng dengan telur, ayam, dan sayuran segar",
-      price: "Rp 10.000",
+      price: 10000,
     },
     {
       id: 2,
       name: "Mie Goreng",
       description: "Mie goreng spesial dengan topping pilihan",
-      price: "Rp 12.000",
+      price: 12000,
     },
     {
       id: 3,
       name: "Ayam Geprek",
       description: "Ayam crispy dengan sambal pedas khas GMRH",
-      price: "Rp 15.000",
+      price: 15000,
     },
   ];
 
@@ -26,10 +28,10 @@ export function MenuPreview() {
 
         {/* Title */}
         <div className="text-center mb-14">
-          <h2 className="text-3xl font-bold text-black">
+          <h2 className="text-3xl font-bold text-gray-900">
             Pilihan Menu Terbaik Kami
           </h2>
-          <p className="mt-2 text-gray-700">
+          <p className="mt-2 text-gray-600">
             Pilihlah Menu Yang Pelanggan Inginkan
           </p>
         </div>
@@ -39,23 +41,29 @@ export function MenuPreview() {
           {menus.map((menu) => (
             <div
               key={menu.id}
-              className="rounded-2xl bg-white shadow-md overflow-hidden"
+              className="rounded-3xl bg-white shadow-sm overflow-hidden transition hover:shadow-lg"
             >
               {/* Image Placeholder */}
-              <div className="h-56 bg-gray-300 flex items-center justify-center text-gray-500">
+              <div className="h-56 bg-gray-200 flex items-center justify-center text-gray-400">
                 Gambar Menu
               </div>
 
               {/* Content */}
-              <div className="p-5">
-                <h3 className="font-semibold text-lg">{menu.name}</h3>
+              <div className="p-6">
+                <h3 className="text-lg font-semibold text-gray-900">
+                  {menu.name}
+                </h3>
+
                 <p className="mt-2 text-sm text-gray-600">
                   {menu.description}
                 </p>
 
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="font-semibold">{menu.price}</span>
-                  <button className="rounded-lg bg-orange-500 px-4 py-2 text-sm text-white hover:bg-orange-600">
+                <div className="mt-5 flex items-center justify-between">
+                  <span className="text-lg font-bold text-orange-600">
+                    Rp {menu.price.toLocaleString("id-ID")}
+                  </span>
+
+                  <button className="rounded-lg bg-orange-500 px-4 py-2 text-sm text-white transition hover:bg-orange-600">
                     🛒 Keranjang
                   </button>
                 </div>
@@ -66,9 +74,11 @@ export function MenuPreview() {
 
         {/* Button */}
         <div className="mt-14 text-center">
-          <button className="rounded-xl bg-orange-500 px-8 py-4 text-white font-semibold hover:bg-orange-600">
+          <Link
+            href="/menu"
+            className="inline-block rounded-xl bg-orange-500 px-8 py-4 text-white font-semibold transition hover:bg-orange-600">
             Lihat Semua Menu
-          </button>
+          </Link>
         </div>
 
       </div>

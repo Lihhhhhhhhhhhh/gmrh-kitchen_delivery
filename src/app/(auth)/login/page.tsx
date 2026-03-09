@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import Link from "next/link";
 
 export default function LoginPage() {
   const supabase = createClient();
@@ -31,65 +31,67 @@ export default function LoginPage() {
   return (
     <div className="w-full max-w-md rounded-3xl bg-white p-10 shadow-xl">
 
-      {/* Title */}
-      <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold text-gray-900">
-          Masuk ke GMRH Food
-        </h1>
-        <p className="mt-2 text-gray-600">
-          Silakan login untuk melanjutkan
-        </p>
+      <div className="mb-6 flex justify-center">
+        <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-orange-500 text-3xl text-white">
+          🍴
+        </div>
       </div>
 
-      {/* Form */}
-      <form onSubmit={handleLogin} className="space-y-6">
 
-        {/* Email */}
+      <h1 className="text-center text-3xl font-bold text-gray-900">
+        GMRH Kitchen & Delivery
+      </h1>
+
+      <p className="mb-8 text-center text-gray-600">
+        Masuk ke akun Anda
+      </p>
+
+      <form onSubmit={handleLogin} className="space-y-5">
+
+        {/* EMAIL */}
         <div>
-          <label className="mb-2 block text-sm font-semibold text-gray-900">
+          <label className="mb-2 block text-sm font-medium text-gray-800">
             Email
           </label>
 
           <input
             type="email"
+            placeholder="Masukkan email"
             required
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-xl bg-gray-50 px-5 py-4 border border-gray-200 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
+            className="w-full rounded-xl bg-gray-100 px-4 py-3 text-gray-900 placeholder-gray-400 outline-none focus:bg-gray-200"
           />
         </div>
 
-        {/* Password */}
+        {/* PASSWORD */}
         <div>
-          <label className="mb-2 block text-sm font-semibold text-gray-900">
+          <label className="mb-2 block text-sm font-medium text-gray-800">
             Password
           </label>
 
           <input
             type="password"
+            placeholder="Masukkan password"
             required
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full rounded-xl bg-gray-50 px-5 py-4 border border-gray-200 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
+            className="w-full rounded-xl bg-gray-100 px-4 py-3 text-gray-900 placeholder-gray-400 outline-none focus:bg-gray-200"
           />
         </div>
 
-        {/* Button */}
         <button
           type="submit"
-          className="w-full rounded-xl bg-orange-500 py-4 font-semibold text-white hover:bg-orange-600"
+          className="mt-4 w-full rounded-xl bg-orange-500 py-3 text-lg font-semibold text-white hover:bg-orange-600"
         >
           Masuk
         </button>
-
       </form>
 
-      {/* Register Link */}
-      <p className="mt-6 text-center text-sm text-gray-600">
+      <p className="mt-6 text-center text-sm text-gray-700">
         Belum punya akun?{" "}
-        <Link href="/register" className="text-orange-600 font-semibold">
-          Daftar
+        <Link href="/register" className="font-medium text-orange-500">
+          Daftar di sini
         </Link>
       </p>
-
     </div>
   );
 }

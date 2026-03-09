@@ -11,7 +11,7 @@ export default function MenuPage() {
         {/* Title */}
         <div className="mb-14 text-center">
           <h1 className="text-4xl font-bold text-gray-900">
-            Daftar Menu GMRH Food
+            Daftar Menu GMRH Kitchen
           </h1>
 
           <p className="mt-3 text-gray-600">

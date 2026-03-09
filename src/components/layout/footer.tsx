@@ -13,7 +13,7 @@ export function Footer() {
               <span className="text-3xl">🍽️</span>
               <div>
                 <span className="text-2xl font-extrabold tracking-wide text-gray-900">
-                  GMRH Food
+                  GMRH Kitchen
                 </span>
               </div>
             </div>
@@ -51,7 +51,7 @@ export function Footer() {
           <div>
             <h3 className="mb-4 font-semibold text-black">Kontak</h3>
             <ul className="space-y-2 text-sm text-gray-700">
-              <li>📧 support@gmrhfood.id</li>
+              <li>📧 support@gmrhkitchen.id</li>
               <li>📞 +62 812-3456-7890</li>
               <li>📍 Sumedang, Jawa Barat</li>
             </ul>

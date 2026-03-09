@@ -50,7 +50,7 @@ export function Header() {
 
         {/* Logo */}
         <Link href="/" className="text-xl font-bold text-orange-600">
-          GMRH
+          GMRH Kitchen
         </Link>
 
         {/* Navigation */}

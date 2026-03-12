@@ -14,6 +14,7 @@
 
     const handleAdd = () => {
 
+      
       addToCart({
         id: menu.id,
         name: menu.name,
@@ -34,9 +35,9 @@
         {/* Image */}
         <div className="h-56 bg-gray-200 overflow-hidden">
 
-    {menu.image_url? (
+    {menu.image? (
       <img
-        src={menu.image_url}
+        src={menu.image}
         alt={menu.name}
         className="w-full h-full object-cover"
       />

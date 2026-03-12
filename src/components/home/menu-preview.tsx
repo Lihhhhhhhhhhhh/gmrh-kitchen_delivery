@@ -14,22 +14,24 @@ export function MenuPreview() {
 
   useEffect(()=>{
 
-    const fetchMenus = async ()=>{
+    const fetchMenus = async () => {
 
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from("products")
         .select("*")
-        .limit(3);
+        .limit(3);   // hanya 3 menu
 
-      if(data){
-        setMenus(data);
+      if(error){
+        console.error(error);
+        return;
       }
 
+      setMenus(data || []);
     };
 
     fetchMenus();
 
-  },[supabase]);
+  },[]);
 
   return (
 
@@ -49,10 +51,7 @@ export function MenuPreview() {
         <div className="grid gap-10 md:grid-cols-3">
 
           {menus.map((menu)=>(
-            <MenuCard
-              key={menu.id}
-              menu={menu}
-            />
+            <MenuCard key={menu.id} menu={menu}/>
           ))}
 
         </div>

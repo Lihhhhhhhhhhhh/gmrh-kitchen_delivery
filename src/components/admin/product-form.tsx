@@ -22,8 +22,9 @@ const [stock,setStock] = useState(product?.stock || 0)
 
   const handleSubmit = async (e:React.FormEvent)=>{
     e.preventDefault()
+        setStock(0)
 
-    let image_url: string | null = null
+    let imageUrl: string | null = null
 
     if(image){
 
@@ -42,33 +43,33 @@ const [stock,setStock] = useState(product?.stock || 0)
         .from("products")
         .getPublicUrl(fileName)
 
-      image_url = publicUrlData.publicUrl
+      imageUrl = publicUrlData.publicUrl
     }
 
     if(product){
 
       await supabase
-        .from("products")
-        .update({
-          name,
-          description,
-          price,
-          image_url,
-          stock
-        })
-        .eq("id",product.id)
+  .from("products")
+  .update({
+    name,
+    description,
+    price,
+    stock,
+    image: imageUrl
+  })
+  .eq("id", product.id)
 
     }else{
 
-      await supabase
+          await supabase
         .from("products")
         .insert({
-  name,
-  description,
-  price,
-  image_url,
-  stock
-})
+          name,
+          description,
+          price,
+          stock,
+          image: imageUrl
+        })
     }
 
     setName("")
@@ -85,7 +86,6 @@ const [stock,setStock] = useState(product?.stock || 0)
       onSubmit={handleSubmit}
       className="bg-white p-6 rounded-xl shadow space-y-5"
     >
-
       <div>
         <label className="text-sm font-medium text-gray-700">
           Nama Produk
@@ -173,6 +173,7 @@ const [stock,setStock] = useState(product?.stock || 0)
         className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium"
       >
         {product ? "Update Produk" : "Tambah Produk"}
+        
       </button>
 
     </form>

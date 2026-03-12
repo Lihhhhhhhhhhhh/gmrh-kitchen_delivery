@@ -5,31 +5,36 @@ import { Product } from "@/types/product";
 import { createClient } from "@/lib/supabase/client";
 import { ProductForm } from "@/components/admin/product-form";
 
-export default function ProductsPage() {
+export default function ProductsPage(){
 
   const supabase = createClient();
 
   const [products,setProducts] = useState<Product[]>([]);
   const [editing,setEditing] = useState<Product | null>(null);
 
+  const fetchProducts = async () => {
+
+    const { data, error } = await supabase
+      .from("products")
+      .select("*");
+
+    if(error){
+      console.error(error);
+      return;
+    }
+
+    setProducts(data || []);
+  };
+
   useEffect(() => {
 
-    const fetchProducts = async () => {
+  const loadProducts = async () => {
+    await fetchProducts();
+  };
 
-      const { data } = await supabase
-        .from("products")
-        .select("*")
-        .order("created_at",{ascending:false});
+  loadProducts();
 
-      if(data){
-        setProducts(data);
-      }
-
-    };
-
-    fetchProducts();
-
-  }, [supabase]);
+}, []);
 
   const deleteProduct = async (id:string)=>{
 
@@ -38,8 +43,7 @@ export default function ProductsPage() {
       .delete()
       .eq("id",id);
 
-    setProducts(prev => prev.filter(p => p.id !== id));
-
+    fetchProducts();
   };
 
   return(
@@ -52,7 +56,7 @@ export default function ProductsPage() {
 
       <ProductForm
         product={editing || undefined}
-        onSuccess={()=>setEditing(null)}
+        onSuccess={fetchProducts}   // refresh setelah tambah produk
       />
 
       <div className="bg-white rounded-xl shadow overflow-hidden">
@@ -60,20 +64,17 @@ export default function ProductsPage() {
         <table className="w-full">
 
           <thead className="bg-gray-100">
-
             <tr className="text-left">
               <th className="p-3">Nama</th>
               <th className="p-3">Harga</th>
               <th className="p-3">Stok</th>
               <th className="p-3">Aksi</th>
             </tr>
-
           </thead>
 
           <tbody>
 
             {products.map((product)=>(
-
               <tr key={product.id} className="border-t">
 
                 <td className="p-3">
@@ -107,7 +108,6 @@ export default function ProductsPage() {
                 </td>
 
               </tr>
-
             ))}
 
           </tbody>
@@ -117,5 +117,5 @@ export default function ProductsPage() {
       </div>
 
     </div>
-  )
+  );
 }
